@@ -3,8 +3,8 @@ import { AppModule } from './app.module';
 import { NestExpressApplication } from '@nestjs/platform-express';
 import { Logger, ValidationPipe } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
-import { PrismaService } from './common/services/prisma.service';
 import { useContainer } from 'class-validator';
+import { PrismaService } from './common/services/prisma.service';
 
 const logger = new Logger('Bootstrap');
 

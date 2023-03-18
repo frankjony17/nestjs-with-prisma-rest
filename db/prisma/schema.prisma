@@ -1,0 +1,15 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../../node_modules/@generated/prisma-client"
+}
+
+model benefit_type {
+  id          String  @id @default(uuid())
+  name        String  @unique
+  description String?
+}
