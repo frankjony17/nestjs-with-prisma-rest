@@ -3,7 +3,7 @@ import { INestApplication } from '@nestjs/common';
 import * as request from 'supertest';
 import { BenefitModule } from '../src/modules/benefit/benefit.module';
 
-describe('BenefitController (e2e)', () => {
+describe('Benefit_typeController (e2e)', () => {
   let app: INestApplication;
 
   beforeEach(async () => {

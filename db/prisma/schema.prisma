@@ -8,8 +8,10 @@ generator client {
   output   = "../../node_modules/@generated/prisma-client"
 }
 
-model benefit_type {
+model BenefitType {
   id          String  @id @default(uuid())
   name        String  @unique
   description String?
+
+  @@map("benefit_type")
 }
