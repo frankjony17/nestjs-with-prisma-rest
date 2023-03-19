@@ -1,10 +1,15 @@
 import { NestFactory } from '@nestjs/core';
-import { AppModule } from './app.module';
 import { NestExpressApplication } from '@nestjs/platform-express';
 import { Logger, ValidationPipe } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { useContainer } from 'class-validator';
+import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
+
+import { AppModule } from './app.module';
 import { PrismaService } from './common/services/prisma.service';
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore
+import * as pkg from '../package.json';
 
 const logger = new Logger('Bootstrap');
 
@@ -27,6 +32,20 @@ async function bootstrap() {
   );
 
   useContainer(app.select(AppModule), { fallbackOnErrors: true });
+
+  SwaggerModule.setup(
+    'docs',
+    app,
+    SwaggerModule.createDocument(
+      app,
+      new DocumentBuilder()
+        .setTitle(pkg.name)
+        .setDescription(pkg.description)
+        .setVersion(pkg.version)
+        .setContact(pkg.author.name, pkg.author.url, pkg.author.email)
+        .build(),
+    ),
+  );
 
   await app.listen(appPort, appHost, () => {
     logger.log(`The server is listening on http://${appHost}:${appPort}`);

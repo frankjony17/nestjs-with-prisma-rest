@@ -6,7 +6,7 @@ export class BenefitController {
   constructor(private readonly appService: BenefitService) {}
 
   @Get()
-  getBenefitType(): string {
-    return this.appService.getBenefitType();
+  getBenefit(): string {
+    return this.appService.getBenefit();
   }
 }
